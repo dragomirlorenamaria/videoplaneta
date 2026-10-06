@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misión Tierra — 4º Primaria</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      background: #020617;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .pantalla {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ESTRELLAS */
+    .estrellas {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 20% 70%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 25%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 50% 10%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 65% 70%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 80% 30%, white 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 80%, white 0 1px, transparent 2px);
+      opacity: 0.8;
+    }
+
+    /* ANIMACIONES */
+    .flotar {
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    @keyframes flotar {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .respirar {
+      animation: respirar 2s infinite;
+    }
+
+    @keyframes respirar {
+      50% {
+        box-shadow:
+          0 0 0 15px rgba(56,189,248,.08),
+          0 0 50px rgba(56,189,248,.5);
+      }
+    }
+
+    .girar {
+      animation: girar 18s linear infinite;
+    }
+
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .rebote {
+      animation: rebote 2s ease-in-out infinite;
+    }
+
+    @keyframes rebote {
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .entrada {
+      animation: entrada .5s ease;
+    }
+
+    @keyframes entrada {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scan {
+      animation: scan 3s linear infinite;
+    }
+
+    @keyframes scan {
+      from {
+        top: -10%;
+      }
+
+      to {
+        top: 110%;
+      }
+    }
+
+    .capa {
+      transition: .25s;
+      cursor: pointer;
+    }
+
+    .capa:hover {
+      filter: brightness(1.25);
+      transform: scale(1.03);
+    }
+
+    .capa.seleccionada {
+      outline: 4px solid #fde047;
+      outline-offset: 3px;
+    }
+
+    .confeti {
+      position: fixed;
+      z-index: 999;
+      pointer-events: none;
+      font-size: 20px;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app" class="pantalla">
+
+  <div class="estrellas"></div>
+
+  <!-- ======================================================
+       CABECERA
+  ======================================================= -->
+
+  <header class="relative z-20 flex justify-between items-center
+                 px-5 md:px-10 py-4
+                 border-b border-white/10
+                 bg-slate-950/40 backdrop-blur">
+
+    <div>
+      <div class="text-xs uppercase tracking-[.25em]
+                  text-sky-300 font-bold">
+        4º Primaria · Ciencias
+      </div>
+
+      <h1 class="font-black text-xl md:text-2xl">
+        🚀 Misión: La Tierra y sus capas
+      </h1>
+    </div>
+
+    <div class="flex items-center gap-3">
+
+      <span id="faseTexto"
+            class="text-xs text-slate-300">
+        Misión 1/4
+      </span>
+
+      <div class="w-24 md:w-40 h-2
+                  bg-white/10 rounded-full overflow-hidden">
+
+        <div id="barraProgreso"
+             class="h-full bg-yellow-400 rounded-full transition-all duration-500"
+             style="width:25%">
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ======================================================
+       ESCENA 1 — INTRODUCCIÓN
+  ======================================================= -->
+
+  <section id="intro"
+           class="relative z-10
+                  min-h-[calc(100vh-73px)]
+                  flex items-center justify-center
+                  p-5">
+
+    <div class="max-w-6xl w-full
+                grid lg:grid-cols-2
+                gap-8 items-center">
+
+      <!-- CIENTÍFICA -->
+
+      <div class="flex justify-center">
+
+        <div class="flotar relative w-60 h-80">
+
+          <!-- Mochila -->
+          <div class="absolute right-0 top-32
+                      w-14 h-28
+                      bg-slate-600
+                      border-4 border-slate-400
+                      rounded-2xl">
+          </div>
+
+          <!-- Cuerpo -->
+          <div class="absolute
+                      left-1/2 -translate-x-1/2
+                      bottom-0
+                      w-44 h-44
+                      bg-white
+                      rounded-[45px_45px_25px_25px]
+                      border-4 border-sky-200
+                      shadow-xl">
+          </div>
+
+          <!-- Brazo izquierdo -->
+          <div class="absolute left-0 top-48
+                      w-16 h-8
+                      bg-white
+                      border-4 border-sky-200
+                      rounded-full
+                      -rotate-12">
+          </div>
+
+          <!-- Brazo derecho -->
+          <div class="absolute right-0 top-48
+                      w-16 h-8
+                      bg-white
+                      border-4 border-sky-200
+                      rounded-full
+                      rotate-12">
+          </div>
+
+          <!-- Cuello -->
+          <div class="absolute
+                      left-1/2 -translate-x-1/2
+                      top-28
+                      w-12 h-10
+                      bg-[#eab08b]
+                      rounded-b-xl">
+          </div>
+
+          <!-- Cabeza -->
+          <div class="absolute
+                      left-1/2 -translate-x-1/2
+                      top-2
+                      w-32 h-32
+                      bg-[#f3c39e]
+                      border-4 border-[#d98d68]
+                      rounded-[48%]">
+
+            <!-- Pelo -->
+            <div class="absolute
+                        -top-3 -left-1
+                        w-32 h-16
+                        bg-slate-800
+                        rounded-[60%]">
+            </div>
+
+            <!-- Gafas -->
+            <div class="absolute left-5 top-14
+                        w-9 h-7
+                        border-2 border-sky-700
+                        rounded-lg">
+            </div>
+
+            <div class="absolute right-5 top-14
+                        w-9 h-7
+                        border-2 border-sky-700
+                        rounded-lg">
+            </div>
+
+            <div class="absolute
+                        left-1/2 top-[27px]
+                        -translate-x-1/2
+                        w-5 border-t-2 border-sky-700">
+            </div>
+
+            <!-- Ojos -->
+            <div class="absolute left-8 top-[43px]
+                        w-2 h-3 bg-slate-800 rounded-full">
+            </div>
+
+            <div class="absolute right-8 top-[43px]
+                        w-2 h-3 bg-slate-800 rounded-full">
+            </div>
+
+            <!-- Sonrisa -->
+            <div class="absolute
+                        left-1/2 top-[76px]
+                        -translate-x-1/2
+                        w-8 h-3
+                        border-b-2 border-slate-700
+                        rounded-full">
+            </div>
+
+          </div>
+
+          <!-- Insignia -->
+          <div class="absolute
+                      left-1/2 -translate-x-1/2
+                      top-[170px]
+                      bg-sky-500
+                      w-10 h-10
+                      rounded-full
+                      flex items-center justify-center
+                      font-black">
+            Σ
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- MENSAJE -->
+
+      <div>
+
+        <div class="bg-white text-slate-900
+                    rounded-3xl
+                    p-6 md:p-8
+                    shadow-2xl
+                    border-4 border-sky-200">
+
+          <div class="text-sm font-black
+                      text-sky-700
+                      uppercase tracking-wider mb-3">
+
+            👩‍🔬 Dra. Vega
+          </div>
+
+          <p id="textoMision"
+             class="text-lg md:text-xl
+                    leading-relaxed
+                    font-semibold">
+          </p>
+
+
+          <div class="flex flex-wrap gap-3 mt-6">
+
+            <button id="botonEscuchar"
+                    class="bg-sky-600
+                           hover:bg-sky-500
+                           text-white
+                           font-black
+                           px-5 py-3
+                           rounded-2xl
+                           transition">
+
+              ▶ Escuchar misión
+
+            </button>
+
+            <button id="botonSonido"
+                    class="px-4 py-3
+                           rounded-2xl
+                           bg-slate-100">
+
+              🔊
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button id="botonAceptar"
+                class="mt-5
+                       w-full
+                       bg-yellow-400
+                       hover:bg-yellow-300
+                       text-slate-950
+                       font-black
+                       text-lg
+                       p-4
+                       rounded-2xl
+                       opacity-40
+                       pointer-events-none
+                       transition">
+
+          🚀 ¡ACEPTAMOS LA MISIÓN!
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       ESCENA 2 — EXPLORACIÓN
+  ======================================================= -->
+
+  <section id="exploracion"
+           class="relative z-10
+                  oculto
+                  min-h-[calc(100vh-73px)]
+                  p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-5">
+
+        <span class="text-sky-300 text-sm font-black uppercase">
+          Misión 2 · Exploración
+        </span>
+
+        <h2 class="text-3xl md:text-4xl font-black">
+          🌍 Viaje al interior de la Tierra
+        </h2>
+
+        <p class="text-slate-300 mt-2">
+          Pulsa las diferentes capas para analizarlas.
+        </p>
+
+      </div>
+
+
+      <div class="grid lg:grid-cols-2 gap-6 items-center">
+
+        <!-- TIERRA -->
+
+        <div class="flex justify-center">
+
+          <div id="tierraCortada"
+               class="relative
+                      w-[310px] h-[310px]
+                      md:w-[390px] md:h-[390px]
+                      rounded-full
+                      overflow-hidden
+                      border-8 border-slate-300
+                      shadow-[0_0_60px_#38bdf855]">
+
+            <!-- Corteza -->
+            <div class="capa absolute inset-0
+                        bg-emerald-600"
+                 data-capa="Corteza">
+            </div>
+
+            <!-- Manto -->
+            <div class="capa absolute inset-[28px]
+                        bg-orange-500
+                        rounded-full"
+                 data-capa="Manto">
+            </div>
+
+            <!-- Núcleo externo -->
+            <div class="capa absolute inset-[88px]
+                        bg-red-600
+                        rounded-full"
+                 data-capa="Núcleo externo">
+            </div>
+
+            <!-- Núcleo interno -->
+            <div class="capa absolute inset-[143px]
+                        bg-yellow-200
+                        rounded-full"
+                 data-capa="Núcleo interno">
+            </div>
+
+            <!-- Escáner -->
+            <div class="scan absolute
+                        left-0 right-0
+                        h-1
+                        bg-white/50
+                        shadow-[0_0_15px_white]
+                        pointer-events-none">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div class="bg-white/10
+                    border border-white/15
+                    rounded-3xl
+                    p-6
+                    backdrop-blur">
+
+          <div class="flex gap-3 items-center">
+
+            <div class="text-3xl">
+              🔬
+            </div>
+
+            <div>
+
+              <h3 class="font-black text-xl">
+                Cuaderno de campo
+              </h3>
+
+              <p id="contadorCapas"
+                 class="text-sm text-slate-300">
+                0 de 4 capas investigadas
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div id="informacionCapa"
+               class="mt-4
+                      min-h-[190px]
+                      bg-slate-950/50
+                      rounded-2xl
+                      p-5
+                      flex items-center justify-center
+                      text-center
+                      text-slate-300">
+
+            🌍 Selecciona una capa para descubrir
+            sus secretos.
+
+          </div>
+
+
+          <button id="botonReconstruir"
+                  class="mt-4
+                         w-full
+                         bg-yellow-400
+                         text-slate-950
+                         font-black
+                         py-3
+                         rounded-2xl
+                         opacity-40
+                         pointer-events-none">
+
+            🧩 Reconstruir modelo
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       ESCENA 3 — RECONSTRUCCIÓN
+  ======================================================= -->
+
+  <section id="modelo"
+           class="relative z-10
+                  oculto
+                  min-h-[calc(100vh-73px)]
+                  p-5
+                  flex items-center justify-center">
+
+    <div class="max-w-4xl w-full">
+
+      <div class="text-center">
+
+        <span class="text-sky-300
+                     text-sm
+                     font-black
+                     uppercase">
+
+          Misión 3 · Reconstrucción
+
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-black">
+
+          🧩 Construye la Tierra
+
+        </h2>
+
+        <p class="text-slate-300 mt-2">
+
+          Coloca las piezas desde el exterior
+          hasta el centro.
+
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 gap-6 mt-7">
+
+        <!-- PIEZAS -->
+
+        <div id="piezas"
+             class="grid grid-cols-2 gap-3">
+        </div>
+
+
+        <!-- MODELO -->
+
+        <div class="rounded-3xl
+                    bg-white/10
+                    border border-white/15
+                    p-5">
+
+          <h3 class="font-black text-lg mb-3">
+
+            🌎 Modelo de la misión
+
+          </h3>
+
+          <div id="pilaCapas"
+               class="space-y-2">
+          </div>
+
+          <p id="mensajeModelo"
+             class="text-center
+                    text-slate-300
+                    mt-5">
+
+            Aún no hay piezas.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       ESCENA 4 — QUIZ
+  ======================================================= -->
+
+  <section id="quiz"
+           class="relative z-10
+                  oculto
+                  min-h-[calc(100vh-73px)]
+                  flex items-center
+                  justify-center
+                  p-5">
+
+    <div class="max-w-3xl w-full text-center">
+
+      <div class="text-6xl">
+        🧠
+      </div>
+
+      <span class="text-sky-300
+                   text-sm
+                   font-black
+                   uppercase">
+
+        Misión 4 · Reto final
+
+      </span>
+
+      <h2 class="text-3xl md:text-5xl font-black mt-2">
+
+        ¿Sois auténticos científicos?
+
+      </h2>
+
+      <p id="pregunta"
+         class="text-xl md:text-2xl
+                font-bold
+                mt-6">
+      </p>
+
+      <div id="respuestas"
+           class="grid md:grid-cols-2
+                  gap-3
+                  mt-6">
+      </div>
+
+      <div id="feedback"
+           class="min-h-8
+                  mt-5
+                  font-black">
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       ESCENA FINAL
+  ======================================================= -->
+
+  <section id="final"
+           class="relative z-10
+                  oculto
+                  min-h-[calc(100vh-73px)]
+                  flex items-center
+                  justify-center
+                  p-5">
+
+    <div class="text-center max-w-3xl">
+
+      <div class="text-7xl md:text-9xl rebote">
+        🌍🚀
+      </div>
+
+      <div class="text-yellow-300
+                  font-black
+                  uppercase
+                  tracking-[.25em]
+                  mt-5">
+
+        ⭐ MISIÓN CUMPLIDA ⭐
+
+      </div>
+
+      <h2 class="text-4xl md:text-6xl
+                 font-black
+                 mt-2">
+
+        ¡Equipo científico extraordinario!
+
+      </h2>
+
+      <p class="text-lg md:text-xl
+                text-slate-300
+                mt-5">
+
+        Habéis descubierto que nuestro planeta
+        tiene cuatro grandes capas:
+
+        <strong class="text-white">
+          corteza, manto, núcleo externo
+          y núcleo interno.
+        </strong>
+
+      </p>
+
+
+      <div class="mt-7
+                  bg-white/10
+                  border border-white/10
+                  rounded-3xl
+                  p-5">
+
+        <p class="text-2xl font-black">
+          🏆 ¡Sois oficialmente
+          jóvenes científicos!
+        </p>
+
+      </div>
+
+
+      <button onclick="location.reload()"
+              class="mt-7
+                     bg-yellow-400
+                     hover:bg-yellow-300
+                     text-slate-950
+                     font-black
+                     px-7 py-4
+                     rounded-2xl">
+
+        🔁 Repetir misión
+
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+const textoMision = `
+Tenemos un problema: los científicos han perdido la información sobre el interior de nuestro planeta.
+
+Sabemos que vivimos sobre la Tierra, pero… ¿qué hay debajo de nuestros pies?
+
+Necesitamos un equipo de jóvenes científicos que investigue el interior de nuestro planeta y reconstruya un modelo de la Tierra.
+
+¿Aceptáis la misión?
+`;
+
+let sonidoActivado = true;
+let capasEncontradas = new Set();
+
+let ordenModelo = [];
+
+let preguntaActual = 0;
+
+let puntuacion = 0;
+
+
+/* =========================================================
+   FUNCIONES GENERALES
+========================================================= */
+
+function mostrar(pantalla) {
+
+  const pantallas = [
+    "intro",
+    "exploracion",
+    "modelo",
+    "quiz",
+    "final"
+  ];
+
+  pantallas.forEach(id => {
+    document.getElementById(id).classList.add("oculto");
+  });
+
+  document.getElementById(pantalla)
+          .classList.remove("oculto");
+}
+
+
+function actualizarProgreso(fase, porcentaje) {
+
+  document.getElementById("faseTexto")
+          .textContent = `Misión ${fase}/4`;
+
+  document.getElementById("barraProgreso")
+          .style.width = porcentaje + "%";
+}
+
+
+/* =========================================================
+   VOZ
+========================================================= */
+
+function hablar(texto) {
+
+  if (!sonidoActivado) return;
+
+  if (!("speechSynthesis" in window)) {
+    alert("Tu navegador no dispone de síntesis de voz.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const voz = new SpeechSynthesisUtterance(texto);
+
+  voz.lang = "es-ES";
+  voz.rate = 0.9;
+  voz.pitch = 1.05;
+  voz.volume = 1;
+
+  speechSynthesis.speak(voz);
+}
+
+
+/* =========================================================
+   EFECTOS DE SONIDO
+========================================================= */
+
+function sonido(frecuencia, duracion) {
+
+  if (!sonidoActivado) return;
+
+  try {
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    const contexto = new AudioContext();
+
+    const oscilador =
+      contexto.createOscillator();
+
+    const ganancia =
+      contexto.createGain();
+
+    oscilador.frequency.value = frecuencia;
+
+    oscilador.type = "sine";
+
+    ganancia.gain.setValueAtTime(
+      0.001,
+      contexto.currentTime
+    );
+
+    ganancia.gain.exponentialRampToValueAtTime(
+      0.12,
+      contexto.currentTime + 0.02
+    );
+
+    ganancia.gain.exponentialRampToValueAtTime(
+      0.001,
+      contexto.currentTime + duracion
+    );
+
+    oscilador.connect(ganancia);
+
+    ganancia.connect(contexto.destination);
+
+    oscilador.start();
+
+    oscilador.stop(
+      contexto.currentTime + duracion
+    );
+
+  } catch (error) {
+
+    console.log("Audio no disponible");
+
+  }
+}
+
+
+/* =========================================================
+   INTRODUCCIÓN
+========================================================= */
+
+function escribirMision() {
+
+  const elemento =
+    document.getElementById("textoMision");
+
+  elemento.textContent = "";
+
+  let posicion = 0;
+
+  const intervalo = setInterval(() => {
+
+    elemento.textContent +=
+      textoMision[posicion];
+
+    posicion++;
+
+    if (posicion >= textoMision.length) {
+
+      clearInterval(intervalo);
+
+      const boton =
+        document.getElementById("botonAceptar");
+
+      boton.classList.remove(
+        "opacity-40",
+        "pointer-events-none"
+      );
+
+    }
+
+  }, 12);
+}
+
+
+document.getElementById("botonEscuchar")
+.addEventListener("click", () => {
+
+  escribirMision();
+
+  hablar(textoMision);
+
+});
+
+
+document.getElementById("botonSonido")
+.addEventListener("click", () => {
+
+  sonidoActivado = !sonidoActivado;
+
+  document.getElementById("botonSonido")
+          .textContent =
+          sonidoActivado ? "🔊" : "🔇";
+
+  if (!sonidoActivado &&
+      "speechSynthesis" in window) {
+
+    speechSynthesis.cancel();
+
+  }
+
+});
+
+
+document.getElementById("botonAceptar")
+.addEventListener("click", () => {
+
+  mostrar("exploracion");
+
+  actualizarProgreso(2, 50);
+
+  sonido(660, 0.15);
+
+});
+
+
+/* =========================================================
+   CAPAS DE LA TIERRA
+========================================================= */
+
+const informacion = {
+
+  "Corteza": {
+
+    emoji: "🏔️",
+
+    titulo: "La corteza",
+
+    texto:
+      "Es la capa más externa y delgada de la Tierra. " +
+      "Es sólida y está formada por rocas. " +
+      "Nosotros vivimos sobre ella."
+
+  },
+
+  "Manto": {
+
+    emoji: "🌋",
+
+    titulo: "El manto",
+
+    texto:
+      "Está debajo de la corteza y es muchísimo más grueso. " +
+      "Sus rocas están muy calientes y pueden moverse lentamente."
+
+  },
+
+  "Núcleo externo": {
+
+    emoji: "🔥",
+
+    titulo: "El núcleo externo",
+
+    texto:
+      "Es una capa extremadamente caliente y líquida. " +
+      "Está formada principalmente por hierro y níquel."
+
+  },
+
+  "Núcleo interno": {
+
+    emoji: "💛",
+
+    titulo: "El núcleo interno",
+
+    texto:
+      "Es la parte más profunda de la Tierra. " +
+      "Aunque está muy caliente, es sólido debido a la enorme presión."
+
+  }
+
+};
+
+
+document.querySelectorAll(".capa")
+.forEach(capa => {
+
+  capa.addEventListener("click", () => {
+
+    const nombre =
+      capa.dataset.capa;
+
+    capasEncontradas.add(nombre);
+
+    document.querySelectorAll(".capa")
+      .forEach(c =>
+        c.classList.remove("seleccionada")
+      );
+
+    capa.classList.add("seleccionada");
+
+
+    const datos =
+      informacion[nombre];
+
+
+    document.getElementById("informacionCapa")
+      .innerHTML = `
+
+        <div class="entrada">
+
+          <div class="text-5xl">
+            ${datos.emoji}
+          </div>
+
+          <h3 class="text-2xl
+                     font-black
+                     text-yellow-300
+                     mt-2">
+
+            ${datos.titulo}
+
+          </h3>
+
+          <p class="mt-3
+                    leading-relaxed">
+
+            ${datos.texto}
+
+          </p>
+
+        </div>
+
+      `;
+
+
+    document.getElementById("contadorCapas")
+      .textContent =
+      `${capasEncontradas.size} de 4 capas investigadas`;
+
+
+    sonido(
+      400 + capasEncontradas.size * 100,
+      0.1
+    );
+
+
+    if (capasEncontradas.size === 4) {
+
+      const boton =
+        document.getElementById(
+          "botonReconstruir"
+        );
+
+      boton.classList.remove(
+        "opacity-40",
+        "pointer-events-none"
+      );
+
+      boton.textContent =
+        "🧩 ¡Modelo listo! Reconstruir";
+
+    }
+
+  });
+
+});
+
+
+/* =========================================================
+   RECONSTRUCCIÓN
+========================================================= */
+
+const ordenCorrecto = [
+
+  "Corteza",
+  "Manto",
+  "Núcleo externo",
+  "Núcleo interno"
+
+];
+
+
+const colores = {
+
+  "Corteza":
+    "bg-emerald-600",
+
+  "Manto":
+    "bg-orange-500",
+
+  "Núcleo externo":
+    "bg-red-600",
+
+  "Núcleo interno":
+    "bg-yellow-200 text-slate-900"
+
+};
+
+
+document.getElementById("botonReconstruir")
+.addEventListener("click", () => {
+
+  mostrar("modelo");
+
+  actualizarProgreso(3, 75);
+
+  crearPiezas();
+
+});
+
+
+function crearPiezas() {
+
+  const contenedor =
+    document.getElementById("piezas");
+
+  contenedor.innerHTML = "";
+
+  ordenModelo = [];
+
+  document.getElementById("pilaCapas")
+    .innerHTML = "";
+
+  document.getElementById("mensajeModelo")
+    .textContent =
+    "Pulsa las piezas desde fuera hacia dentro.";
+
+
+  const piezas =
+    [...ordenCorrecto]
+    .sort(() => Math.random() - 0.5);
+
+
+  piezas.forEach(nombre => {
+
+    const boton =
+      document.createElement("button");
+
+    boton.textContent = nombre;
+
+    boton.className =
+      colores[nombre] +
+      " font-black p-4 rounded-2xl " +
+      "shadow-lg hover:scale-105 " +
+      "transition";
+
+
+    boton.addEventListener("click", () => {
+
+      const siguiente =
+        ordenCorrecto[ordenModelo.length];
+
+
+      if (nombre === siguiente) {
+
+        ordenModelo.push(nombre);
+
+        boton.disabled = true;
+
+        boton.classList.add("opacity-40");
+
+
+        const fila =
+          document.createElement("div");
+
+        fila.className =
+          "entrada p-3 rounded-xl bg-white/10 font-bold";
+
+        fila.textContent =
+          `${ordenModelo.length}. ${nombre}`;
+
+        document.getElementById("pilaCapas")
+          .appendChild(fila);
+
+
+        sonido(
+          500 + ordenModelo.length * 100,
+          0.12
+        );
+
+
+        if (ordenModelo.length === 4) {
+
+          document.getElementById(
+            "mensajeModelo"
+          ).innerHTML =
+
+          `<span class="text-green-300">
+            🎉 ¡Modelo reconstruido!
+            El reto final está desbloqueado.
+          </span>`;
+
+
+          setTimeout(() => {
+
+            mostrar("quiz");
+
+            actualizarProgreso(4, 90);
+
+            iniciarQuiz();
+
+          }, 1200);
+
+        }
+
+      } else {
+
+        document.getElementById(
+          "mensajeModelo"
+        ).innerHTML =
+
+        `<span class="text-red-300">
+          🔎 Esa no es la siguiente.
+          Empieza por la capa exterior.
+        </span>`;
+
+        sonido(180, 0.18);
+
+      }
+
+    });
+
+
+    contenedor.appendChild(boton);
+
+  });
+
+}
+
+
+/* =========================================================
+   PREGUNTAS
+========================================================= */
+
+const preguntas = [
+
+  {
+
+    pregunta:
+      "¿Cuál es la capa en la que vivimos?",
+
+    respuestas: [
+      "Corteza",
+      "Manto",
+      "Núcleo externo",
+      "Núcleo interno"
+    ],
+
+    correcta: 0
+
+  },
+
+  {
+
+    pregunta:
+      "¿Qué capa es líquida?",
+
+    respuestas: [
+      "Corteza",
+      "Manto",
+      "Núcleo externo",
+      "Núcleo interno"
+    ],
+
+    correcta: 2
+
+  },
+
+  {
+
+    pregunta:
+      "¿Cuál es la capa más profunda?",
+
+    respuestas: [
+      "Corteza",
+      "Manto",
+      "Núcleo externo",
+      "Núcleo interno"
+    ],
+
+    correcta: 3
+
+  },
+
+  {
+
+    pregunta:
+      "¿Por qué el núcleo interno es sólido?",
+
+    respuestas: [
+      "Por la enorme presión",
+      "Porque está frío",
+      "Porque está vacío",
+      "Porque contiene hielo"
+    ],
+
+    correcta: 0
+
+  }
+
+];
+
+
+function iniciarQuiz() {
+
+  preguntaActual = 0;
+
+  puntuacion = 0;
+
+  mostrarPregunta();
+
+}
+
+
+function mostrarPregunta() {
+
+  if (preguntaActual >= preguntas.length) {
+
+    terminarMision();
+
+    return;
+
+  }
+
+
+  const pregunta =
+    preguntas[preguntaActual];
+
+
+  document.getElementById("pregunta")
+    .textContent =
+    `${preguntaActual + 1}. ${pregunta.pregunta}`;
+
+
+  document.getElementById("feedback")
+    .textContent = "";
+
+
+  const contenedor =
+    document.getElementById("respuestas");
+
+  contenedor.innerHTML = "";
+
+
+  pregunta.respuestas
+    .forEach((respuesta, indice) => {
+
+      const boton =
+        document.createElement("button");
+
+      boton.textContent = respuesta;
+
+      boton.className =
+        "bg-white/10 " +
+        "hover:bg-white/20 " +
+        "border border-white/10 " +
+        "p-4 rounded-2xl " +
+        "font-bold transition";
+
+
+      boton.addEventListener("click", () => {
+
+        contenedor
+          .querySelectorAll("button")
+          .forEach(b => b.disabled = true);
+
+
+        if (indice === pregunta.correcta) {
+
+          puntuacion++;
+
+          boton.classList.add(
+            "ring-4",
+            "ring-green-400"
+          );
+
+
+          document.getElementById("feedback")
+            .innerHTML =
+            "✅ ¡Respuesta correcta!";
+
+
+          sonido(880, 0.15);
+
+        } else {
+
+          boton.classList.add(
+            "ring-4",
+            "ring-red-400"
+          );
+
+
+          document.getElementById("feedback")
+            .innerHTML =
+            "🔎 ¡Casi! Seguid investigando.";
+
+
+          sonido(180, 0.18);
+
+        }
+
+
+        setTimeout(() => {
+
+          preguntaActual++;
+
+          mostrarPregunta();
+
+        }, 1000);
+
+      });
+
+
+      contenedor.appendChild(boton);
+
+    });
+
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+function terminarMision() {
+
+  mostrar("final");
+
+  actualizarProgreso("✓", 100);
+
+  lanzarConfeti();
+
+  sonidoVictoria();
+
+}
+
+
+function sonidoVictoria() {
+
+  const notas = [
+    523,
+    659,
+    784,
+    1047
+  ];
+
+
+  notas.forEach((nota, indice) => {
+
+    setTimeout(() => {
+
+      sonido(nota, 0.22);
+
+    }, indice * 170);
+
+  });
+
+}
+
+
+function lanzarConfeti() {
+
+  const simbolos = [
+    "⭐",
+    "✨",
+    "🌟",
+    "🎉",
+    "●",
+    "◆"
+  ];
+
+
+  for (let i = 0; i < 90; i++) {
+
+    const elemento =
+      document.createElement("div");
+
+    elemento.className =
+      "confeti";
+
+    elemento.textContent =
+      simbolos[
+        Math.floor(
+          Math.random() *
+          simbolos.length
+        )
+      ];
+
+
+    elemento.style.left =
+      Math.random() * 100 + "vw";
+
+    elemento.style.top =
+      "45vh";
+
+
+    document.body.appendChild(elemento);
+
+
+    const x =
+      Math.random() * 600 - 300;
+
+    const y =
+      250 +
+      Math.random() * 500;
+
+
+    elemento.animate(
+
+      [
+
+        {
+          transform:
+            "translate(0,0) rotate(0deg)",
+          opacity: 1
+        },
+
+        {
+
+          transform:
+            `translate(${x}px,${y}px)
+             rotate(${Math.random()*720}deg)`,
+
+          opacity: 0
+
+        }
+
+      ],
+
+      {
+
+        duration:
+          1200 +
+          Math.random() * 1300,
+
+        easing:
+          "cubic-bezier(.2,.7,.2,1)"
+
+      }
+
+    );
+
+
+    setTimeout(
+      () => elemento.remove(),
+      2700
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ARRANQUE
+========================================================= */
+
+window.addEventListener("load", () => {
+
+  escribirMision();
+
+  setTimeout(() => {
+
+    hablar(textoMision);
+
+  }, 700);
+
+});
+
+</script>
+
+</body>
+</html>
